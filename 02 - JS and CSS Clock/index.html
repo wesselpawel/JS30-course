@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+<body>
+
+
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+        <div class="electric"></div>
+      </div>
+    </div>
+
+
+  <style>
+    html {
+      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 20px solid white;
+      border-radius: 50%;
+      margin: 50px auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .hand {
+      width: 50%;
+      height: 6px;
+      background: black;
+      position: absolute;
+      top: 50%;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      transition: 0.05s;
+      transition-timing-function: ease-in;
+      z-index:1;
+    }
+    
+    .electric{
+      height:50px;
+      width:100px;
+      background-color: rgba(255, 255, 255, 0.356);
+      transform: translate(100%, 400%);
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15px;
+      color:rgba(255, 255, 255, 0.712);
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+  </style>
+  <script>
+    //Fix shanking hands in the future. Is it even possible?!
+    const secondHand = document.querySelector('.second-hand');
+    const minuteHand = document.querySelector('.min-hand');
+    const hourHand = document.querySelector('.hour-hand');
+    const electric = document.querySelector('.electric');
+    function Clock(){
+      const time = new Date();
+
+      const hours = time.getHours();
+      const minutes = time.getMinutes()
+      const seconds = time.getSeconds();
+
+      const secondsDegrees = ((seconds / 60) * 360) + 90;
+      const minutesDegrees = ((minutes / 60) * 360) + ((seconds/60)*6) + 90;
+      const hoursDegrees = ((hours / 12) * 360) + ((minutes/60)*30) + 90;
+      
+      secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+      minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
+      hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+
+      const electricHour = `0${hours}`.slice(-2);
+      const electricMinute = `0${minutes}`.slice(-2);
+      const electricSecond = `0${seconds}`.slice(-2);
+      electric.innerHTML = `<p>${electricHour}:${electricMinute}:${electricSecond}</p>`;
+    }
+    setInterval(Clock, 1000);
+  </script>
+</body>
+</html>
