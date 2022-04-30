@@ -1,0 +1,21 @@
+html, body{
+    margin:0;
+    padding:0;
+}
+
+.sequention{
+    min-width:50px;
+    background-color: black;
+    color:white;
+    max-height:155px;
+    overflow-x: scroll;
+    overflow-wrap: unset;
+}
+
+.path{
+    min-width:50px;
+    overflow-x: scroll;
+    height:155px;
+    padding:2px;
+    max-height: 55px;
+}

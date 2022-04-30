@@ -42,7 +42,7 @@ volumeBar.forEach(bar => bar.addEventListener('change', handleVolume))
 volumeBar.forEach(bar => bar.addEventListener('mousemove', handleVolume))
 video.addEventListener('timeupdate', handleProgress)
 
-let mousedown = false
+let mousedown
 progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
 progress.addEventListener('mousedown', () => mousedown = true)
 progress.addEventListener('mouseup', () => mousedown = false)

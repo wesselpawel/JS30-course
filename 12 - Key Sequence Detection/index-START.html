@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+
+const keySequence = []
+//const acceptableKeys = ["a", "s", "d", "f", "g", "h", "j", "k", "l"]
+const secretCode = "abc"
+window.addEventListener('keyup', (e) => {
+  if(e.key != 'Backspace') {
+     keySequence.push(e.key)
+  }
+  if (e.key === 'Backspace'){
+    keySequence.pop()
+  }
+  console.log(keySequence.join(''));
+  if (keySequence.slice(-3).join('').includes(secretCode)){
+    cornify_add()
+    console.log()
+  }
+})
+
+const display = document.querySelector('.sequention')
+
+
+</script>
+</body>
+</html>
